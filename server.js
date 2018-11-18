@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const addTeamRoutes = require('./routes/team-routes')
 
-const app = express();
+const app = express(); //needed
 
 app.use(cors({
     origin: ['http://localhost:3000'],
