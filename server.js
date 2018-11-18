@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const addTeamRoutes = require('./routes/team-routes')
 
-const app = express();
+const app = express(); 
 
 app.use(cors({
     origin: ['http://localhost:3000'],
@@ -16,14 +16,14 @@ addTeamRoutes(app)
 
 if (process.env.NODE_ENV === 'production') {
     // Exprees will serve up production assets
-    app.use(express.static('/build'));
-
+    app.use(express.static('front/build'));
+  
     // Express serve up index.html file if it doesn't recognize route
     const path = require('path');
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+      res.sendFile(path.resolve(__dirname, 'front', 'build', 'index.html'));
     });
-}
+  }
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`phone app listening on port ${PORT}`))
