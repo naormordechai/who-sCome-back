@@ -19,8 +19,21 @@ function checkPassword(roomInfo) {
         .then(db => db.collection('team').findOne({ _id, password: roomInfo.password }))
 }
 
+function checkIfIsExsist(room) {
+    return mongoService.connect()
+        .then(db => db.collection('team').findOne({ roomName: room.roomName }))
+}
+
+function addRoom(room) {
+    return mongoService.connect()
+    .then(db => db.collection('team').insertOne(room))
+    .then(_ => room)
+}
+
 module.exports = {
     query,
     getById,
-    checkPassword
+    checkPassword,
+    checkIfIsExsist,
+    addRoom
 }

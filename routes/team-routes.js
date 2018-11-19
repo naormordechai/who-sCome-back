@@ -16,6 +16,15 @@ function addTeamRoutes(app) {
         roomService.checkPassword(req.body)
             .then(room => res.json(room))
     })
+
+    app.post('/room/addRoom', (req, res) => {
+        roomService.checkIfIsExsist(req.body)
+            .then(isExsist => {
+                if (isExsist) return res.json(false)
+                roomService.addRoom(req.body)
+                    .then(room => res.json(room))
+            })
+    })
 }
 
 module.exports = addTeamRoutes
